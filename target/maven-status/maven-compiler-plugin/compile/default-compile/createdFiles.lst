@@ -1,2 +1,3 @@
-chanel/pioneer/ksql/udfdemo/Multiply.class
-chanel/pioneer/ksql/udfdemo/Helloworld.class
+chanel\pioneer\ksql\udfdemo\Multiply.class
+chanel\pioneer\ksql\udfdemo\Helloworld.class
+chanel\pioneer\ksql\udfdemo\ArrayOfStructContainsRegion.class
