@@ -17,8 +17,8 @@ public class ArrayOfStructContainsRegion {
 
 	  @Udf(description = "checks if an array of struct contains a region")
 	  public <T> Boolean containsRegion(
-			  @UdfParameter(schema = "ARRAY<STRUCT<REGIONID VARCHAR, DIVISIONID VARCHAR, MARKETID VARCHAR>>") final List<Struct> markets,
-			  @UdfParameter final String region
+			  @UdfParameter(value = "markets", schema = "ARRAY<STRUCT<REGIONID VARCHAR, DIVISIONID VARCHAR, MARKETID VARCHAR>>") final List<Struct> markets,
+			  @UdfParameter("region") final String region
 	  ) {
 		  for(int i=0;i<markets.size();i++) {
 			  System.out.println("markets["+i+"]->REGIONID = "+markets.get(i).getString("REGIONID"));

@@ -79,6 +79,9 @@
                             <mainClass>${exec.mainClass}</mainClass>
                         </manifest>
                     </archive>
+                    <compilerArgs>
+                		<arg>-parameters</arg>
+            		</compilerArgs>
                 </configuration>
                 <executions>
                     <execution>
