@@ -44,11 +44,17 @@
 		    <version>4.4</version>
 		    <scope>test</scope>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.apache.kafka</groupId> -->
+<!-- 		    <artifactId>kafka-clients</artifactId> -->
+<!-- 		    <version>2.3.0</version> -->
+<!-- 		</dependency>     -->
+		<!-- https://mvnrepository.com/artifact/org.apache.kafka/connect-api -->
 		<dependency>
 		    <groupId>org.apache.kafka</groupId>
-		    <artifactId>kafka-clients</artifactId>
-		    <version>2.3.0</version>
-		</dependency>    	
+		    <artifactId>connect-api</artifactId>
+		    <version>2.4.1</version>
+		</dependency>	
     </dependencies>
 
     <!-- Build boilerplate -->

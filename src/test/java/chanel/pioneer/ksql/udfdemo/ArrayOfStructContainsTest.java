@@ -1,9 +1,8 @@
 package chanel.pioneer.ksql.udfdemo;
 
-import org.apache.kafka.common.protocol.types.Field;
-import org.apache.kafka.common.protocol.types.Schema;
-import org.apache.kafka.common.protocol.types.Struct;
-import org.apache.kafka.common.protocol.types.Type;
+import org.apache.kafka.connect.data.Schema;
+import org.apache.kafka.connect.data.SchemaBuilder;
+import org.apache.kafka.connect.data.Struct;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -28,25 +27,27 @@ public class ArrayOfStructContainsTest {
 		 */
         
         List<Struct> jsonArray = new ArrayList<Struct>();
-        Schema schema = new Schema(
-        		new Field("REGIONID", Type.STRING), 
-        		new Field("DIVISIONID", Type.STRING), 
-        		new Field("MARKETID", Type.STRING)
-        		);
-        Struct struct1 = new Struct(schema);
-        struct1.set("REGIONID", "region1");
-        struct1.set("DIVISIONID", "division1");
-        struct1.set("MARKETID", "market1");
         
-        Struct struct2 = new Struct(schema);
-        struct2.set("REGIONID", "region2");
-        struct2.set("DIVISIONID", "division2");
-        struct2.set("MARKETID", "market2");
+        Schema marketsSchema = SchemaBuilder.struct()
+                .field("REGIONID", Schema.STRING_SCHEMA)
+                .field("DIVISIONID", Schema.STRING_SCHEMA)
+                .field("MARKETID", Schema.STRING_SCHEMA)
+                .build();
         
-        Struct struct3 = new Struct(schema);
-        struct3.set("REGIONID", "region3");
-        struct3.set("DIVISIONID", "division3");
-        struct3.set("MARKETID", "market3");
+        Struct struct1 = new Struct(marketsSchema)
+        .put("REGIONID", "region1")
+        .put("DIVISIONID", "division1")
+        .put("MARKETID", "market1");
+        
+        Struct struct2 = new Struct(marketsSchema)
+        .put("REGIONID", "region2")
+        .put("DIVISIONID", "division2")
+        .put("MARKETID", "market2");
+        
+        Struct struct3 = new Struct(marketsSchema)
+        .put("REGIONID", "region3")
+        .put("DIVISIONID", "division3")
+        .put("MARKETID", "market3");
         
         jsonArray.add(struct1);
         jsonArray.add(struct2);
@@ -54,8 +55,11 @@ public class ArrayOfStructContainsTest {
         
         System.out.println(jsonArray.toString());
         
+        assertEquals(false, jsonUdf.containsRegion(null, null));
+        assertEquals(false, jsonUdf.containsRegion(jsonArray, null));
         assertEquals(true, jsonUdf.containsRegion(jsonArray, "region1"));
         assertEquals(true, jsonUdf.containsRegion(jsonArray, "region2"));
+        assertEquals(true, jsonUdf.containsRegion(jsonArray, "region3"));
         assertEquals(false, jsonUdf.containsRegion(jsonArray, "region4"));
     }
     
