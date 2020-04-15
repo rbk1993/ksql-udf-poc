@@ -8,7 +8,7 @@ import io.confluent.ksql.function.udf.Udf;
 import io.confluent.ksql.function.udf.UdfDescription;
 import io.confluent.ksql.function.udf.UdfParameter;
 
-@UdfDescription(name = "arrayOfStructContainsRegion", description = "checks if array of struct contains a value")
+@UdfDescription(name = "arrayOfStructContainsRegion", description = "checks if array of struct contains a region")
 public class ArrayOfStructContainsRegion {
 	
 	  public final String REGION_ID = "REGIONID";

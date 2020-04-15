@@ -9,24 +9,24 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayOfStructContainsTest {
+public class ArrayOfStructContainsRegionTest {
 
-	private ArrayOfStructContainsRegion jsonUdf = new ArrayOfStructContainsRegion();
+	private ArrayOfStructContainsRegion udf = new ArrayOfStructContainsRegion();
 	
     @Test
-    public void shouldFindIntegersInJsonArray() {
+    public void shouldFindRegionInArrayOfStruct() {
     	
 		/*
 		 * final String json = "[" +
 		 * "{\"REGIONID\":\"region1\",\"DIVISIONID\":\"division1\",\"MARKETID\":\"market1\"},"
 		 * +
-		 * "{\"REGIONID\":\"region2\",\"DIVISIONID\":\"division1\",\"MARKETID\":\"market1\"},"
+		 * "{\"REGIONID\":\"region2\",\"DIVISIONID\":\"division2\",\"MARKETID\":\"market2\"},"
 		 * +
-		 * "{\"REGIONID\":\"region3\",\"DIVISIONID\":\"division1\",\"MARKETID\":\"market1\"}"
+		 * "{\"REGIONID\":\"region3\",\"DIVISIONID\":\"division3\",\"MARKETID\":\"market3\"}"
 		 * + "]";
 		 */
         
-        List<Struct> jsonArray = new ArrayList<Struct>();
+        List<Struct> arrayOfStruct = new ArrayList<Struct>();
         
         Schema marketsSchema = SchemaBuilder.struct()
                 .field("REGIONID", Schema.STRING_SCHEMA)
@@ -49,18 +49,18 @@ public class ArrayOfStructContainsTest {
         .put("DIVISIONID", "division3")
         .put("MARKETID", "market3");
         
-        jsonArray.add(struct1);
-        jsonArray.add(struct2);
-        jsonArray.add(struct3);
+        arrayOfStruct.add(struct1);
+        arrayOfStruct.add(struct2);
+        arrayOfStruct.add(struct3);
         
-        System.out.println(jsonArray.toString());
+        System.out.println(arrayOfStruct.toString());
         
-        assertEquals(false, jsonUdf.containsRegion(null, null));
-        assertEquals(false, jsonUdf.containsRegion(jsonArray, null));
-        assertEquals(true, jsonUdf.containsRegion(jsonArray, "region1"));
-        assertEquals(true, jsonUdf.containsRegion(jsonArray, "region2"));
-        assertEquals(true, jsonUdf.containsRegion(jsonArray, "region3"));
-        assertEquals(false, jsonUdf.containsRegion(jsonArray, "region4"));
+        assertEquals(false, udf.containsRegion(null, null));
+        assertEquals(false, udf.containsRegion(arrayOfStruct, null));
+        assertEquals(true, udf.containsRegion(arrayOfStruct, "region1"));
+        assertEquals(true, udf.containsRegion(arrayOfStruct, "region2"));
+        assertEquals(true, udf.containsRegion(arrayOfStruct, "region3"));
+        assertEquals(false, udf.containsRegion(arrayOfStruct, "region4"));
     }
     
 }
